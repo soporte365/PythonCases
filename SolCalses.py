@@ -28,7 +28,12 @@ class personaje: #Creamos el objeto personaje el cual es una clase
         print(self.nombre, "ha muerto")
 
     def daño(self, enemigo):
-        return self.fuerza - enemigo.defensa
+        #return abs(self.fuerza - enemigo.defensa)
+        if self.fuerza >= enemigo.defensa:
+           return self.fuerza - enemigo.defensa
+        else:
+           return self.fuerza
+
 
     def atacar(self, enemigo):
         daño = self.daño(enemigo)
@@ -62,8 +67,10 @@ class guerrero(personaje):
         print("- Espada: ", self.espada)
 
     def daño(self, enemigo):
-        return self.fuerza * self.espada - enemigo.defensa
-
+        if (self.fuerza * self.espada)  >= enemigo.defensa:
+           return self.fuerza * self.espada - enemigo.defensa
+        else:
+           return self.fuerza * self.espada
 
 class mago(personaje):
 
@@ -86,20 +93,23 @@ class mago(personaje):
         print("- Libro: ", self.libro)
 
     def daño(self, enemigo):
-        return self.fuerza * self.libro - enemigo.defensa
+        if (self.fuerza * self.libro) >= enemigo.defensa:
+            return self.fuerza * self.libro - enemigo.defensa
+        else:
+            return self.fuerza * self.libro
 
 # Creamos una variable " Mi_pj"de tipo clase
-Norm = personaje("Turme", 10, 5, 20, 100)
-Guerr = guerrero("Guerero", 4, 2, 5, 100, 5)
+Norm = personaje("Turme", 2, 5, 20, 100)
+Guerr = guerrero("Guerero", 5, 2, 5, 100, 10)
 Mago = mago("Maguito", 4, 2, 5, 100, 5)
 
 Norm.atributos()
-Guerr.cambia_arma()
 Guerr.atributos()
-Mago.cambia_arma()
 Mago.atributos()
-
-
+Guerr.atacar(Norm)
+#Guerr.atributos()
+#Mago.atacar(Norm)
+#Norm.atributos()
 #Mi_pj.atacar(Mi_enemy)
 #Mi_pj.atributos()
 #Mi_enemy.atributos()
